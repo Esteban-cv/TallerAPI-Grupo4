@@ -80,7 +80,7 @@ class ArticleController extends Controller
         $article->update($request->all());
         $response = [
             'message' => 'Artículo actualizado exitosamente',
-            'art$article' => $article
+            'article' => $article
         ];
         return response()->json($response, Response::HTTP_OK);
     }
@@ -92,8 +92,8 @@ class ArticleController extends Controller
     {
         $article->delete();
         $response = [
-            'message' => 'Orden eliminada exitosamente',
-            'article$article' => $article
+            'message' => 'Artículo eliminado exitosamente',
+            'article' => $article
         ];
         return response()->json($response, Response::HTTP_OK);
     }
