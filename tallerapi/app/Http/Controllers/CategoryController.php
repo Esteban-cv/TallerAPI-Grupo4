@@ -2,16 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
+    private $rules = [
+        'name' => 'required|string|min:3|max:80',
+        'description' => 'required|string|min:31|max:100'
+
+    ];
+
+    private $traductionAttributes = [
+        'name' => 'nombre',
+        'description' => 'descripción'
+    ];
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return response()->json($categories, Response::HTTP_OK);
     }
 
     /**
@@ -19,30 +33,58 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->applyValidator($request, $this->rules, $this->traductionAttributes);
+        if (!empty($data)) {
+            return $data;
+        }
+
+        $category = Category::create($request->all());
+        $response = [
+            'message' => 'Registro creado exitosamente',
+            'category' => $category
+        ];
+
+        return response()->json($response, Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Category $category)
     {
-        //
+        return response()->json($category, Response::HTTP_OK);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $data = $this->applyValidator($request, $this->rules, $this->traductionAttributes);
+        if (!empty($data)) {
+            return $data;
+        }
+
+        $category->update($request->all());
+        $response = [
+            'message' => 'Registro actualizado exitosamente',
+            'category' => $category
+        ];
+
+        return response()->json($response, Response::HTTP_OK);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        $data = [
+            'message' => 'Registro eliminado exitosamente',
+            'category' => $category
+        ];
+
+        return response()->json($data, Response::HTTP_OK);
     }
 }
