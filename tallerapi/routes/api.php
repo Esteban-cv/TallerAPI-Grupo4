@@ -9,7 +9,6 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PresentationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
