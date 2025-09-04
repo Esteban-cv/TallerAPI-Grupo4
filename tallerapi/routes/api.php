@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\IssueController;
@@ -24,18 +25,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('auth/login', [AuthController::class, 'login'])->name('auth.login');
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+    Route::apiResource('article', ArticleController::class);
+    Route::apiResource('category', CategoryController::class);
+    Route::apiResource('entry', EntryController::class);
+    Route::apiResource('issue', IssueController::class);
+    Route::apiResource('person', PersonController::class);
+    Route::apiResource('presentation', PresentationController::class);
+    Route::apiResource('supplier', SupplierController::class);
+    Route::apiResource('unit', UnitController::class);
+    Route::apiResource('user', UserController::class);
 });
-
-Route::apiResource('unit', UnitController::class);
-
-Route::apiResource('article', ArticleController::class);
-Route::apiResource('category', CategoryController::class);
-Route::apiResource('entry', EntryController::class);
-Route::apiResource('issue', IssueController::class);
-Route::apiResource('person', PersonController::class);
-Route::apiResource('presentation', PresentationController::class);
-Route::apiResource('supplier', SupplierController::class);
-Route::apiResource('unit', UnitController::class);
-Route::apiResource('user', UserController::class);
