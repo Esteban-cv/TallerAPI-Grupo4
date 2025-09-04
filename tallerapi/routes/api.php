@@ -36,7 +36,6 @@ Route::apiResource('entry', EntryController::class);
 Route::apiResource('issue', IssueController::class);
 Route::apiResource('person', PersonController::class);
 Route::apiResource('presentation', PresentationController::class);
-Route::apiResource('role', RoleController::class);
 Route::apiResource('supplier', SupplierController::class);
 Route::apiResource('unit', UnitController::class);
 Route::apiResource('user', UserController::class);
