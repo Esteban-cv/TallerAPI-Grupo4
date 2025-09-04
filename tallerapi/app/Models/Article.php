@@ -44,8 +44,8 @@ class Article extends Model
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
     }
-    public function units()
+    public function unit()
     {
-        return $this->hasMany(Unit::class);
+        return $this->belongsTo(Unit::class, 'unit_id');
     }
 }
