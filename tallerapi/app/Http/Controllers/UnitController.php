@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Unit;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+
 
 
 class UnitController extends Controller
